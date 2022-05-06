@@ -101,7 +101,7 @@ body {
 
 .textarea {
   height: 200px;
-  max-width: 800px;
+  max-width: 850px;
   width: 100%;
   padding: 10px;
   border: 2px solid #205f8b;
@@ -117,7 +117,7 @@ body {
 }
 
 .keyboard {
-  max-width: 800px;
+  max-width: 850px;
   width: 100%;
   height: auto;
   padding: 5px;
@@ -181,12 +181,35 @@ body {
   -webkit-box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
           box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
 }
-.keyboard .row .key_lower {
-  text-transform: lowercase;
-}
 .keyboard .row .key__control {
   background-color: #093c61;
   color: #ffffff;
+  min-height: 50px;
+  min-width: 50px;
+  border: 1px solid #205f8b;
+  border-radius: 5px;
+  padding: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+.keyboard .row .key__control:hover {
+  background-color: #5fc3e4;
+  color: #ffffff;
+  border: 1px solid #093c61;
+  border-radius: 15px;
+}
+.keyboard .row .key__space {
+  min-width: 350px;
 }
 
 .description {

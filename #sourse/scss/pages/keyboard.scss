@@ -4,7 +4,7 @@
 
 .textarea {
     height: 200px;
-    max-width: 800px;
+    max-width: 850px;
     width: 100%;
     padding: 10px;
     border: 2px solid $cBlue;
@@ -20,7 +20,7 @@
 }
 
 .keyboard {
-    max-width: 800px;
+    max-width: 850px;
     width: 100%;
     height: auto;
     padding: 5px;
@@ -69,13 +69,35 @@
                 border-radius: 15px;
                 box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
             }
-            &_lower {
-                text-transform: lowercase;
-            }
+            // &_lower {
+            //     text-transform: lowercase;
+            // }
 
             &__control {
                 background-color: $cBlueBlack;
                 color: $cWhite;
+
+                min-height: 50px;
+                min-width: 50px;
+                border: 1px solid $cBlue;
+                border-radius: 5px;
+                padding: 5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                cursor: pointer;
+                transition: all 0.5s ease;
+
+                &:hover {
+                    background-color: $cBlueAnim;
+                    color: $cWhite;
+                    border: 1px solid $cBlueBlack;
+                    border-radius: 15px;
+                }
+            }
+
+            &__space {
+                 min-width: 350px;
             }
         }
     }
