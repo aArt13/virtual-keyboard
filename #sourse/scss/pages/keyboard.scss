@@ -1,3 +1,88 @@
-.keyboard {
-    display: flex;
+.title {
+    color: $cBlue;
 }
+
+.textarea {
+    height: 200px;
+    max-width: 800px;
+    width: 100%;
+    padding: 10px;
+    border: 2px solid $cBlue;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    outline: none;
+    resize: none;
+    transition: all 0.5s ease;
+
+    &:hover {
+        border: 2px solid $cBlueAnim;
+    }
+}
+
+.keyboard {
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+    padding: 5px;
+    border: 2px solid $cBlue;
+    background-color: $cWhite;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    transition: all 0.5s ease;
+
+    &:hover {
+        border: 2px solid $cBlueAnim;
+    }
+
+    .row {
+        display: flex;
+        flex: 100%;
+        justify-content: space-between;
+        // gap: 10px;
+
+        .key {
+            min-height: 50px;
+            min-width: 50px;
+            border: 1px solid $cBlue;
+            border-radius: 5px;
+            padding: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.5s ease;
+
+            &:hover {
+                background-color: $cBlueAnim;
+                color: $cWhite;
+                border: 1px solid $cBlueBlack;
+                border-radius: 15px;
+            }
+
+            &_active {
+                background-color: $cBlueAnim;
+                color: $cWhite;
+                border: 1px solid $cBlueBlack;
+                border-radius: 15px;
+                box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
+            }
+            &_lower {
+                text-transform: lowercase;
+            }
+
+            &__control {
+                background-color: $cBlueBlack;
+                color: $cWhite;
+            }
+        }
+    }
+}
+
+.description {
+    color: $cBlue;
+    margin-bottom: 10px;
+}
+

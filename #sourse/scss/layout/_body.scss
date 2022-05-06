@@ -10,15 +10,44 @@ body {
     flex-direction: column;
     justify-content: space-between;
     // position: relative;
+    background-image: url('assets/images/2.png');
+    // background-image: url('assets/images/8.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center 200px;
 }
 
 .container {
     max-width: $mWid;
-    // width: 100%;
+    width: 100%;
     height: auto;
-    padding: 0 20px;
+    padding: 0 12px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &:hover > .description span{
+        animation-fill-mode: forwards;
+        animation: changeColor  4s ease infinite;
+    }
+    &:hover .title{
+        animation-fill-mode: forwards;
+        animation: changeColor  4s ease;
+    }
+}
+
+@keyframes changeColor {
+    0% {
+        color: $cBlue;
+    }
+    40% {
+    color: $cRadAnim;
+    }
+    90% {
+        color: $cBlueBlack;
+    }
+    100% {
+        color: $cBlue;
+    }
 }
