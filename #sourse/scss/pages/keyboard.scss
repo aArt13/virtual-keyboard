@@ -3,13 +3,14 @@
 }
 
 .textarea {
-    height: 200px;
+    margin-bottom: 20px;
+    padding: 10px;
     max-width: 850px;
     width: 100%;
-    padding: 10px;
+    height: 200px;
+    font-size: 20px;
     border: 2px solid $cBlue;
     border-radius: 10px;
-    margin-bottom: 20px;
     outline: none;
     resize: none;
     transition: all 0.5s ease;
@@ -40,18 +41,19 @@
     .row {
         display: flex;
         flex: 100%;
-        justify-content: space-between;
+        justify-content: space-around;
         // gap: 10px;
 
         .key {
-            min-height: 50px;
-            min-width: 50px;
-            border: 1px solid $cBlue;
-            border-radius: 5px;
             padding: 5px;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 50px;
+            min-width: 50px;
+            border: 1px solid $cBlue;
+            border-radius: 5px;
+            color: $cBlueBlack;
             cursor: pointer;
             transition: all 0.5s ease;
 
@@ -61,17 +63,6 @@
                 border: 1px solid $cBlueBlack;
                 border-radius: 15px;
             }
-
-            &_active {
-                background-color: $cBlueAnim;
-                color: $cWhite;
-                border: 1px solid $cBlueBlack;
-                border-radius: 15px;
-                box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
-            }
-            // &_lower {
-            //     text-transform: lowercase;
-            // }
 
             &__control {
                 background-color: $cBlueBlack;
@@ -97,7 +88,37 @@
             }
 
             &__space {
-                 min-width: 350px;
+                min-width: 300px;
+           }
+
+            &__caps {
+                min-width: 124px;
+                position: relative;
+
+                &_active {
+                    // background-color: $cBlue;
+                    // color: $cRadAnim;
+
+                    &::before{
+                        content: '';
+                        position: absolute;
+                        top: 8px;
+                        left: 78px;
+                        width: 10px;
+                        height: 4px;
+                        border-radius: 2px;
+                        display: block;
+                        background-color: $cRadAnim;
+                    }
+                }
+            }
+
+            &_active {
+                background-color: $cBlueAnim;
+                color: $cWhite;
+                border: 1px solid $cBlueBlack;
+                border-radius: 15px;
+                box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
             }
         }
     }

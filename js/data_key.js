@@ -64,8 +64,9 @@ const data_key = [
     ],
     [
       {type: 'ctrl',  code: 'ControlLeft',    style: 'key__control',   label: ['Ctrl', 'Ctrl', 'Ctrl', 'Ctrl']},
+      {type: 'ctrl',  code: 'MetaLeft',       style: 'key__control',   label: ['Win', 'Win', 'Win', 'Win']},
       {type: 'ctrl',  code: 'AltLeft',        style: 'key__control',   label: ['Alt', 'Alt', 'Alt', 'Alt']},
-      {type: 'abc',   code: 'Space',          style: 'key__control',  label: [' ', ' ', ' ', ' ']},
+      {type: 'abc',   code: 'Space',          style: 'key__control',   label: [' ', ' ', ' ', ' ']},
       {type: 'ctrl',  code: 'AltRight',       style: 'key__control',   label: ['Alt', 'Alt', 'Alt', 'Alt']},
       {type: 'ctrl',  code: 'ControlRight',   style: 'key__control',   label: ['Ctrl', 'Ctrl', 'Ctrl', 'Ctrl']},
       {type: 'arrow', code: 'ArrowLeft',      style: 'key__control',   label: ['←', '←', '←', '←']},

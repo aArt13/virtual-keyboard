@@ -100,13 +100,14 @@ body {
 }
 
 .textarea {
-  height: 200px;
+  margin-bottom: 20px;
+  padding: 10px;
   max-width: 850px;
   width: 100%;
-  padding: 10px;
+  height: 200px;
+  font-size: 20px;
   border: 2px solid #205f8b;
   border-radius: 10px;
-  margin-bottom: 20px;
   outline: none;
   resize: none;
   -webkit-transition: all 0.5s ease;
@@ -144,15 +145,10 @@ body {
   -webkit-box-flex: 100%;
       -ms-flex: 100%;
           flex: 100%;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 .keyboard .row .key {
-  min-height: 50px;
-  min-width: 50px;
-  border: 1px solid #205f8b;
-  border-radius: 5px;
   padding: 5px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -163,6 +159,11 @@ body {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  min-height: 50px;
+  min-width: 50px;
+  border: 1px solid #205f8b;
+  border-radius: 5px;
+  color: #093c61;
   cursor: pointer;
   -webkit-transition: all 0.5s ease;
   transition: all 0.5s ease;
@@ -172,14 +173,6 @@ body {
   color: #ffffff;
   border: 1px solid #093c61;
   border-radius: 15px;
-}
-.keyboard .row .key_active {
-  background-color: #5fc3e4;
-  color: #ffffff;
-  border: 1px solid #093c61;
-  border-radius: 15px;
-  -webkit-box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
-          box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
 }
 .keyboard .row .key__control {
   background-color: #093c61;
@@ -209,7 +202,30 @@ body {
   border-radius: 15px;
 }
 .keyboard .row .key__space {
-  min-width: 350px;
+  min-width: 300px;
+}
+.keyboard .row .key__caps {
+  min-width: 124px;
+  position: relative;
+}
+.keyboard .row .key__caps_active::before {
+  content: "";
+  position: absolute;
+  top: 8px;
+  left: 78px;
+  width: 10px;
+  height: 4px;
+  border-radius: 2px;
+  display: block;
+  background-color: #e55d87;
+}
+.keyboard .row .key_active {
+  background-color: #5fc3e4;
+  color: #ffffff;
+  border: 1px solid #093c61;
+  border-radius: 15px;
+  -webkit-box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
+          box-shadow: -7px 5px 11px 1px rgba(34, 60, 80, 0.15);
 }
 
 .description {

@@ -5,117 +5,61 @@ let langEn = 0, // En
     langEnBig = 1, // EnBig
     langRu = 2, // Ru
     langRuBig = 3, // RuBig
-    CurrentKeysStyle = langEn,
+    CurrentKeysStyle,
     caps = false
 
-// let url     = `json/keys_${langKey}.json`
-// let url     = `json/keys_en.json`
-// let urlCntr = `json/keys_control.json`
-
-
-
-
-function loadStorage() {
+const loadStorage = () => {
     if (localStorage.getItem('keyboardStyle') !== null) {
         CurrentKeysStyle = localStorage.keyboardStyle
-        // url = `json/keys_${langKey}.json`
-    } 
+        if(CurrentKeysStyle === '1' || CurrentKeysStyle === '3'){
+            caps = true
+        }
+    } else {
+        CurrentKeysStyle = langEn
+        localStorage.setItem('keyboardStyle', CurrentKeysStyle);
+    }
+    // console.log('loadStorage');
 }
 
 window.addEventListener('loadstart', loadStorage())
 
-function changeLangKey() {
-    if(!caps) {
+const changeLangKey = () => {
+    // console.log('changeLangKey');
         if (CurrentKeysStyle === langEn) {
             CurrentKeysStyle = langRu
-            localStorage.setItem('keyboardStyle', CurrentKeysStyle);
-        } else {
+        } else if (CurrentKeysStyle === langRu) {
             CurrentKeysStyle = langEn
-            localStorage.removeItem('keyboardStyle');
-        }
-    } else {
-        if (CurrentKeysStyle === langEnBig) {
+        } else if (CurrentKeysStyle === langEnBig) {
             CurrentKeysStyle = langRuBig
-            localStorage.setItem('keyboardStyle', CurrentKeysStyle);
-        } else {
+        } else if (CurrentKeysStyle === langRuBig) {
             CurrentKeysStyle = langEnBig
-            localStorage.removeItem('keyboardStyle');
         }
-    }
+
+    localStorage.setItem('keyboardStyle', CurrentKeysStyle);
+
 
 }
 
+const changeCaps = () => {
+    console.log('changeCaps');
+    if(CurrentKeysStyle === langEn){
+        CurrentKeysStyle = langEnBig
+        caps = true
+    } else if(CurrentKeysStyle === langEnBig) {
+        CurrentKeysStyle = langEn
+        caps = false
+    } else if (CurrentKeysStyle === langRu) {
+        CurrentKeysStyle = langRuBig
+        caps = true
+    } else if(CurrentKeysStyle === langRuBig) {
+        CurrentKeysStyle = langRu
+        caps = false
+    }
+    console.log(CurrentKeysStyle);
+    localStorage.setItem('keyboardStyle', CurrentKeysStyle);
 
-// async function getData() {
-//     const response = await fetch(url);
-//     if (response.ok) {
-//         data = await response.json();
-//         console.log(data);
-//         // console.log(data[1][0]);
-//         // console.log((data[1].toString()).length);
-//         // console.log(data[0].length);
-//         // console.log(data[1].length);
-//         // console.log(data[2].length);
-//         // console.log(data[3].length);
-//         // console.log(data[1][0].charCodeAt());
-//         // console.log((data[1][0].toLowerCase()).charCodeAt());
-//         // for (let i = 0; i < data.length; i++) {
-//         //   petsArrayName.push(data[i].name)
-//         // console.log(data[i]);
-
-//             // for (let j = 0; j < data[i].length; j++) {
-//             //     // console.log(data[j]);
-//             //     // console.log(data[i].length);
-//             //     // console.log(data[i][j]);
-//             //     // console.log(data[i][j].length);
-                
-//             // }
-//         // }
-//         // createCards()
-//         // createPopup(data)
-//         createKeyboard(data)
-//         return data
-//     } else {
-//         alert('Error status ' + response.status);
-//       }   
-//   }
-
-// window.addEventListener('loadstart', getData()) 
-// window.addEventListener('loadstart', getDataCntr()) 
-
-// async function getDataCntr() {
-//     const responseCntr = await fetch(urlCntr);
-//     if (responseCntr.ok) {
-//         dataCntr = await responseCntr.json();
-//         // console.log(dataCntr);
-//         // console.log(data[1][0]);
-//         // console.log((data[1].toString()).length);
-//         // console.log(data[0].length);
-//         // console.log(data[1].length);
-//         // console.log(data[2].length);
-//         // console.log(data[3].length);
-//         // console.log(data[1][0].charCodeAt());
-//         // console.log((data[1][0].toLowerCase()).charCodeAt());
-//         // for (let i = 0; i < data.length; i++) {
-//         //   petsArrayName.push(data[i].name)
-//         // console.log(data[i]);
-
-//             // for (let j = 0; j < data[i].length; j++) {
-//             //     // console.log(data[j]);
-//             //     // console.log(data[i].length);
-//             //     // console.log(data[i][j]);
-//             //     // console.log(data[i][j].length);
-                
-//             // }
-//         // }
-//         // createCards()
-//         // createPopup(data)
-//         // createKeyboard(data)
-//         return dataCntr
-//     } else {
-//         alert('Error status ' + responseCntr.status);
-//       }   
-//   }
+    createKeyboard()
+}
 
 let container = null,
     textarea = null,
@@ -126,6 +70,7 @@ let container = null,
     curKey = null
 
 function createElemLoad() {
+    // console.log('createElemLoad');
     while (document.body.firstChild) {
         document.body.removeChild(document.body.firstChild);
     }
@@ -143,7 +88,6 @@ function createElemLoad() {
     textarea.classList.add('textarea')
     textarea.setAttribute('rows', '5')
     textarea.setAttribute('cols', '40')
-    // textarea.setAttribute('name', 'text')
     textarea.setAttribute('wrap', 'soft')
     textarea.setAttribute('placeholder', "Just do it!")
     container.append(textarea)
@@ -171,15 +115,18 @@ function createElemLoad() {
 window.addEventListener('loadstart', createElemLoad())
 
 function createKeyboard() {
-    while (keyboard.firstChild) {
-        keyboard.removeChild(keyboard.firstChild);
-    }
+    // console.log('createKeyboard');
 
     addKeyItems(data_key)
 }
 
 
 function addKeyItems(element) {
+
+    while (keyboard.firstChild) {
+        keyboard.removeChild(keyboard.firstChild);
+    }
+    // console.log('addKeyItems');
     for (let i = 0; i < element.length; i++) {
         row = document.createElement('div')
         row.classList.add('row')
@@ -196,16 +143,22 @@ function addKeyItems(element) {
             key.setAttribute ('data-keycode', `${element[i][j].code}`)
                 if (element[i][j].code === 'Space') {
                     key.classList.add('key__space')
+                }if (element[i][j].code === 'CapsLock') {
+                    key.classList.add('key__caps')
                 }
             row.append(key)
         }
     }
+    if (caps === true) {
+        document.querySelector('.key__caps').classList.add('key__caps_active')
+    }
 }
 
 const changeLang = (e) => {
+
     if ((e.shiftKey || e.metaKey) && (e.altKey || e.metaKey)) {
+            // console.log('changeLang');
         changeLangKey()
-        // getData()
         createKeyboard()
     }
 }
@@ -214,55 +167,32 @@ document.addEventListener('keydown', changeLang)
 
 const keyAct = (e) => {
     // console.log(e);
-    // console.log(e.code);
-    console.log(e.key);
-    // console.log(e.keyCode);
-
+    e.preventDefault()
+    // console.log('keyAct'); 
     keys = document.querySelectorAll('.key')
     keys.forEach((element) => {
         element.classList.remove('key_active')
     })
 
-//    document.querySelector('.key[data-keycode="'+e.code+'"]')
-    // console.log(document.querySelector('.key[data-keycode="'+e.code+'"]'));
     curKey = document.querySelector('.key[data-keycode="'+e.code+'"]')
+    // console.log(curKey == document.querySelector('.key__caps'))
     curKey.classList.add('key_active')
-    writeText(e)
+    writeText(e)   
+    // console.log('keyAct end');   
 }
 
-// document.querySelectorAll('.keyboard .key').forEach(function(element) {
-
-//     element.addEventListener('click', (function(element){
-//         document.querySelectorAll('.key').forEach((element) => {
-//             element.classList.remove('key_active')
-//         })
-//     }))
-
-//     let code = this.getAttribute('data-keyCharCode')
-//     this.classList.add('key_active')
-//     console.log(code);
-    
-// })
-
-
+document.addEventListener('keyup', keyAct)
 
 const keyActMouse = (e) => {
-
-
-    console.log(e.target);
-    console.log(e.target.textContent);
+    e.preventDefault()
     let char = e.target.textContent
     let el = e.target
-
-
-    curKey = document.querySelector('.key[data-keycode="'+e.target.dataset.keycode+'"]')
-    curKey.classList.add('key_active')
-    setTimeout(keyActRem, 300);
-    writeTextMouse(char, el)
-    // keys = document.querySelectorAll('.key')
-    // keys.forEach((element) => {
-    //     element.classList.remove('key_active')
-    // })
+    if(e.target.classList.contains('key')){
+        curKey = document.querySelector('.key[data-keycode="'+e.target.dataset.keycode+'"]')
+        curKey.classList.add('key_active')
+        setTimeout(keyActRem, 300);
+        writeTextMouse(char, el)
+    }
 }
 
 const newKeyboard = document.querySelector('.keyboard')
@@ -275,34 +205,74 @@ const keyActRem = () => {
     })
 }
 
-document.addEventListener('keydown', keyAct)
-// document.addEventListener('click', keyActMouse)
 document.addEventListener('keyup', () => {
     setTimeout(keyActRem, 300);
 })
 
+let cursStart = textarea.selectionStart;
+let cursEnd = textarea.selectionEnd;
+const textBefCurs = textarea.value.substring(0, cursStart);
+const textAftCurs = textarea.value.substring(cursEnd);
+
 const writeText = (e) => {
+    e.preventDefault();
+    // console.log('writeText');
     if(!curKey.classList.contains('key__control')){
         textarea.textContent += e.key
-    }
-    if(e.code === 'Backspace') {
+    } else if(e.code === 'Backspace') {
         let str = textarea.textContent
         textarea.textContent = str.substring(0, str.length - 1)
-    }
-    if(e.code === 'Space') {
+    } else if(e.code === 'Space') {
         textarea.textContent += ' '
+    } else if(e.code === 'Enter') {
+        textarea.textContent += '\n'
+    } else if(e.code === 'CapsLock') {
+        // console.log('CapsLock');
+        changeCaps()
+    } else if(e.code === 'ShiftLeft' || e.code === 'ShiftRight'){
+        if(!e.key === 'Shift') textarea.textContent += e.key.toUpperCase()
+    } else if(e.code === 'Tab') {
+        // console.log('Tab');
+        textarea.textContent += '\t';
+        textarea.selectionStart = textarea.value.length
+
+        //textarea.value = textarea.value.substring(0, cursStart) +
+        //"\t" + textarea.value.substring(cursEnd);
+        // textarea.selectionStart = 
+        // textarea.selectionEnd = cursStart +1
+    } else if(e.code === 'ArrowLeft') {
+        textarea.textContent += '←';
+    } else if(e.code === 'ArrowRight') {
+        textarea.textContent += '→';
+    } else if(e.code === 'ArrowUp') {
+        textarea.textContent += '↑';
+    } else if(e.code === 'ArrowDown') {
+        textarea.textContent += '↓';
     }
 }
 
 const writeTextMouse = (char, el) => {
     if(!curKey.classList.contains('key__control')){
         textarea.textContent += char
-    }
-    if(el.dataset.keycode === 'Backspace') {
+    } else if(el.dataset.keycode === 'Backspace') {
         let str = textarea.textContent
         textarea.textContent = str.substring(0, str.length - 1)
-    }
-    if(el.dataset.keycode === 'Space') {
+    } else if(el.dataset.keycode === 'Space') {
         textarea.textContent += ' '
+    } else if(el.dataset.keycode === 'Enter') {
+        textarea.textContent += '\n'
+    } else if(el.dataset.keycode === 'CapsLock') {
+        changeCaps()
+    } else if(el.dataset.keycode === 'Tab') {
+        textarea.textContent += '\t';
+        textarea.selectionStart = textarea.value.length
+    } else if(el.dataset.keycode === 'ArrowLeft') {
+        textarea.textContent += '←';
+    } else if(el.dataset.keycode === 'ArrowRight') {
+        textarea.textContent += '→';
+    } else if(el.dataset.keycode === 'ArrowUp') {
+        textarea.textContent += '↑';
+    } else if(el.dataset.keycode === 'ArrowDown') {
+        textarea.textContent += '↓';
     }
 }

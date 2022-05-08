@@ -4,42 +4,58 @@ let langEn = 0, // En
     langEnBig = 1, // EnBig
     langRu = 2, // Ru
     langRuBig = 3, // RuBig
-    CurrentKeysStyle = langEn,
+    CurrentKeysStyle,
     caps = false
 
-// let url     = `json/keys_${langKey}.json`
-// let url     = `json/keys_en.json`
-// let urlCntr = `json/keys_control.json`
-
-
-
-
-function loadStorage() {
+const loadStorage = () => {
     if (localStorage.getItem('keyboardStyle') !== null) {
         CurrentKeysStyle = localStorage.keyboardStyle
-        // url = `json/keys_${langKey}.json`
-    } 
+        if(CurrentKeysStyle === '1' || CurrentKeysStyle === '3'){
+            caps = true
+        }
+    } else {
+        CurrentKeysStyle = langEn
+        localStorage.setItem('keyboardStyle', CurrentKeysStyle);
+    }
+    // console.log('loadStorage');
 }
 
 window.addEventListener('loadstart', loadStorage())
 
-function changeLangKey() {
-    if(!caps) {
+const changeLangKey = () => {
+    // console.log('changeLangKey');
         if (CurrentKeysStyle === langEn) {
             CurrentKeysStyle = langRu
-            localStorage.setItem('keyboardStyle', CurrentKeysStyle);
-        } else {
+        } else if (CurrentKeysStyle === langRu) {
             CurrentKeysStyle = langEn
-            localStorage.removeItem('keyboardStyle');
-        }
-    } else {
-        if (CurrentKeysStyle === langEnBig) {
+        } else if (CurrentKeysStyle === langEnBig) {
             CurrentKeysStyle = langRuBig
-            localStorage.setItem('keyboardStyle', CurrentKeysStyle);
-        } else {
+        } else if (CurrentKeysStyle === langRuBig) {
             CurrentKeysStyle = langEnBig
-            localStorage.removeItem('keyboardStyle');
         }
-    }
 
+    localStorage.setItem('keyboardStyle', CurrentKeysStyle);
+
+
+}
+
+const changeCaps = () => {
+    console.log('changeCaps');
+    if(CurrentKeysStyle === langEn){
+        CurrentKeysStyle = langEnBig
+        caps = true
+    } else if(CurrentKeysStyle === langEnBig) {
+        CurrentKeysStyle = langEn
+        caps = false
+    } else if (CurrentKeysStyle === langRu) {
+        CurrentKeysStyle = langRuBig
+        caps = true
+    } else if(CurrentKeysStyle === langRuBig) {
+        CurrentKeysStyle = langRu
+        caps = false
+    }
+    console.log(CurrentKeysStyle);
+    localStorage.setItem('keyboardStyle', CurrentKeysStyle);
+
+    createKeyboard()
 }
