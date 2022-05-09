@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
   },
   extends: [
-    'airbnb-base',
+    "eslint:recommended",
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -13,6 +13,6 @@ module.exports = {
   rules: {
     "semi": ["error", "always"],
     "quotes": ["error", "double"],
-    "import/extensions": [0]
+    // "import/extensions": [0]
   },
 };

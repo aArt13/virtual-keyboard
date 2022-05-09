@@ -1,3 +1,4 @@
+
 import dataKey from "./data/dataKey.js";
 
 const langEn = 0; // En
@@ -217,12 +218,28 @@ const keyActRem = () => {
   });
 };
 
+
+
 const writeTextMouse = (char, el) => {
+  let cursStart = textarea.selectionStart;
+  let cursEnd = textarea.selectionEnd;
+  // let textBefCurs = textarea.textContent.substring(0, cursStart);
+  const textBefCurs = textarea.value.substring(0, cursStart);
+  // let textAftCurs = textarea.textContent.substring(cursEnd);
+  const textAftCurs = textarea.value.substring(cursEnd);
   if (!curKey.classList.contains("key__control")) {
     textarea.textContent += char;
   } else if (el.dataset.keycode === "Backspace") {
     const str = textarea.textContent;
     textarea.textContent = str.substring(0, str.length - 1);
+  } else if (el.dataset.keycode === "Delete") {
+    if (cursStart === cursEnd){
+      textarea.textContent = textBefCurs + textAftCurs.slice(1);
+      textarea.selectionStart = cursStart;
+    } else {
+      textarea.textContent = textBefCurs + textAftCurs;
+      textarea.selectionStart = cursStart;
+    }
   } else if (el.dataset.keycode === "Space") {
     textarea.textContent += " ";
   } else if (el.dataset.keycode === "Enter") {
@@ -262,8 +279,3 @@ newKeyboard.addEventListener("click", keyActMouse);
 document.addEventListener("keyup", () => {
   setTimeout(keyActRem, 300);
 });
-
-// const cursStart = textarea.selectionStart;
-// const cursEnd = textarea.selectionEnd;
-// const textBefCurs = textarea.value.substring(0, cursStart);
-// const textAftCurs = textarea.value.substring(cursEnd);
