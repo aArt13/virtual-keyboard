@@ -5,7 +5,7 @@ module.exports = {
   },
   extends: [
     // "eslint:recommended",
-    'airbnb-base'
+    "airbnb-base/legacy"
   ],
   parserOptions: {
     ecmaVersion: 'latest',
@@ -14,6 +14,6 @@ module.exports = {
   rules: {
     "semi": ["error", "always"],
     "quotes": ["error", "double"],
-    "import/extensions": [0]
+    // "import/extensions": [0]
   },
 };
