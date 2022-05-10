@@ -256,6 +256,9 @@ const changeCaps = () => {
   } else if (CurrentKeysStyle === langRuBig) {
     CurrentKeysStyle = langRu;
     caps = false;
+  } else {
+    CurrentKeysStyle = langEn;
+    caps = false;
   }
   localStorage.setItem("keyboardStyle", CurrentKeysStyle);
 };
